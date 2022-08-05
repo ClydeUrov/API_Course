@@ -48,7 +48,8 @@ def main():
     extracted_link = f'{url_parts.netloc}{url_parts.path}'
     try:
         if is_bitlink(bitly_token, extracted_link):
-            print('Количество кликов по bit.ly ссылке:',
+            print(
+                'Количество кликов по bit.ly ссылке:',
                 count_clicks(bitly_token, extracted_link)
             )
         else:
