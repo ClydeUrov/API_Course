@@ -40,9 +40,9 @@ def is_bitlink(token, bitlink):
 
 def main():
     load_dotenv()
-    parser = argparse.ArgumentParser(description="Создаёт Битлинк")
-    parser.add_argument('name', help='Ваша ссылка')
-    args = parser.parse_args()
+    cmd_input = argparse.ArgumentParser(description="Создаёт Битлинк")
+    cmd_input.add_argument('name', help='Ваша ссылка')
+    args = cmd_input.parse_args()
     bitly_token = os.getenv("BITLY_TOKEN")
     url_parts = urllib.parse.urlparse(args.name)
     extracted_link = f'{url_parts.netloc}{url_parts.path}'
