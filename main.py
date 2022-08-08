@@ -40,11 +40,11 @@ def is_bitlink(token, bitlink):
 
 def main():
     load_dotenv()
-    cmd_input = argparse.ArgumentParser(description="Создаёт Битлинк")
-    cmd_input.add_argument('name', help='Ваша ссылка')
-    args = cmd_input.parse_args()
+    parser = argparse.ArgumentParser(description="Создаёт Битлинк")
+    parser.add_argument('URL', help='Ваша ссылка')
+    args = parser.parse_args()
     bitly_token = os.getenv("BITLY_TOKEN")
-    url_parts = urllib.parse.urlparse(args.name)
+    url_parts = urllib.parse.urlparse(args.URL)
     extracted_link = f'{url_parts.netloc}{url_parts.path}'
     try:
         if is_bitlink(bitly_token, extracted_link):
@@ -53,7 +53,7 @@ def main():
                 count_clicks(bitly_token, extracted_link)
             )
         else:
-            print('Битлинк:', shorten_link(bitly_token, args.name))
+            print('Битлинк:', shorten_link(bitly_token, args.URL))
     except requests.exceptions.HTTPError:
         print('Ошибка: requests.exceptions.HTTPError')
 
